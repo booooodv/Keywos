@@ -171,6 +171,9 @@ function operator(pro) {
 
   pro.forEach((e) => {
     let bktf = false, ens = e.name
+    const sourcePrefix =
+      FNAME ||
+      (e._collectionName ? e._subDisplayName || e._subName || "" : "");
     // 预处理 防止预判或遗漏
     Object.keys(rurekey).forEach((ikey) => {
       if (rurekey[ikey].test(e.name)) {
@@ -259,9 +262,9 @@ function operator(pro) {
       nNames = "";
 
     if (nf) {
-      firstName = FNAME;
+      firstName = sourcePrefix;
     } else {
-      nNames = FNAME;
+      nNames = sourcePrefix;
     }
     if (findKey?.[1]) {
       const findKeyValue = findKey[1];
@@ -280,7 +283,7 @@ function operator(pro) {
       e.name = keyover.join(FGF);
     } else {
       if (nm) {
-        e.name = FNAME + FGF + e.name;
+        e.name = sourcePrefix ? sourcePrefix + FGF + e.name : e.name;
       } else {
         e.name = null;
       }
